@@ -61,9 +61,25 @@ while True:
 
     # Esto es avanzar recto hacia adelante al apretar la tecla w
     if key == ord('w'):
-        action = np.array([0.44, 0.0])
+        action = np.array([30, 0.0])
 
     ### AGREGAR MÁS COMPORTAMIENTOS ###
+    #Direcciones
+
+    #Giro izq
+    if key == ord('a'):
+        action = np.array([0.0, 10])
+    #Giro der
+    if key == ord('d'):
+        action = np.array([0.0, -10])
+    #Atrás
+    if key == ord('s'):
+        action = np.array([-10, 0.0])
+
+    #Revivir
+    if key == ord(' '):
+        print('revivir!!')
+        env.reset()
 
 
 
