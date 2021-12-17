@@ -83,23 +83,28 @@ if __name__ == '__main__':
 
         # convertir imagen a escala de grises
 
+        #Transformar imagen a espacio HSV
+        gray_image=cv2.cvtColor(obs,cv2.COLOR_RGB2GRAY)
+        
         # detectar los tags
         tags = []
+        tags = at_detector.detect(gray_image, estimate_tag_pose=False, camera_params=None, tag_size=None)
         for tag in tags:
             # obtener esquinas del tag
-
+            x,y,z,w =tag.corners
             # calcular p usando las esquinas encontradas (la altura de la deteccion)
-            p = 0
+            p = 0.042
 
             # calcular la distancia desde el robot hasta la deteccion
-            dist = 0
+            dist = 10
 
             if dist <= 1:
                 #si se esta cerca del tag, asignar su id a la variable area
                 pass
-
+                cv2.rectangle(obs, (x, y), (x+z, y+w), (255,0,0), 2)
             #dibujar la deteccion en la imagen
             
+            cv2.imshow('patos', cv2.cvtColor(obs, cv2.COLOR_RGB2BGR))
             
         print(f"ubicacion actual: area {area}")
         cv2.imshow('patos', cv2.cvtColor(obs, cv2.COLOR_RGB2BGR))
